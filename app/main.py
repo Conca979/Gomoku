@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
-from app.game.ai import GomokuAI
+from app.game.dl_ai import DeepLearningAI
 from app.game.engine import GomokuBoard
 from app.schemas.game import GameState, MoveResponse
 
@@ -26,7 +26,7 @@ async def make_ai_move(state: GameState):
     engine = GomokuBoard(size=size)
     engine.board = [row[:] for row in board]  # Copy
 
-    ai = GomokuAI(ai_player='O', human_player='X', depth=2)
+    ai = DeepLearningAI(ai_player='O', human_player='X')
 
     if state.last_move:
         lr, lc = state.last_move
